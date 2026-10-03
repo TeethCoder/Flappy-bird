@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://rdv7u2qyfho2"]
+
+[ext_resource type="FontFile" uid="uid://bokh4vlfq7yv1" path="res://Assets/Fonts/m6x11.ttf" id="1_jxero"]
+[ext_resource type="Script" uid="uid://dwngg1brijoqj" path="res://Scripts/ui.gd" id="1_qdvrb"]
+
+[sub_resource type="Animation" id="Animation_qdvrb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.46666667, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayLabel:theme_override_colors/font_outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nf4gj"]
+resource_name = "fade"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.46666667, 0, 1), Color(1, 0.46666667, 0, 0), Color(1, 0.46666667, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayLabel:theme_override_colors/font_outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2246s"]
+_data = {
+&"RESET": SubResource("Animation_qdvrb"),
+&"fade": SubResource("Animation_nf4gj")
+}
+
+[node name="UI" type="Control" unique_id=132765390]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qdvrb")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2011704458]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HighScoreLabel" type="Label" parent="MarginContainer" unique_id=195941018]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.0627451, 0.60784316, 0.21176471, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_jxero")
+theme_override_font_sizes/font_size = 24
+text = "HIGHEST SCORE: 0"
+horizontal_alignment = 2
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer" unique_id=46973098]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_jxero")
+theme_override_font_sizes/font_size = 24
+text = "SCORE: 0"
+
+[node name="GameOverLabel" type="Label" parent="MarginContainer" unique_id=584335514]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8352941, 0.0627451, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_jxero")
+theme_override_font_sizes/font_size = 32
+text = "Game Over"
+
+[node name="PlayLabel" type="Label" parent="." unique_id=1130779861]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 448.0
+offset_right = 313.0
+offset_bottom = 476.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.46666667, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_jxero")
+theme_override_font_sizes/font_size = 32
+text = "TAP TO PLAY"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=14278523]
+libraries/ = SubResource("AnimationLibrary_2246s")
+autoplay = &"fade"

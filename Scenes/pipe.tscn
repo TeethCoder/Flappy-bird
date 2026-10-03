@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c3imp22tssti"]
+
+[ext_resource type="Script" uid="uid://r4v50ns7h86r" path="res://Scripts/pipe.gd" id="1_hnit7"]
+[ext_resource type="Texture2D" uid="uid://bi8q1xqsdpgyd" path="res://Assets/Tiles/Style 1/PipeStyle1.png" id="1_n21g0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qq576"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_achqy"]
+size = Vector2(28, 503)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6us5"]
+size = Vector2(32, 16)
+
+[node name="Pipe" type="Area2D" unique_id=769005395]
+script = ExtResource("1_hnit7")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1498600110]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 535.0
+grow_horizontal = 2
+texture = ExtResource("1_n21g0")
+region_rect = Rect2(0, 0, 32, 80)
+patch_margin_left = 16
+patch_margin_top = 20
+patch_margin_right = 16
+patch_margin_bottom = 20
+
+[node name="Upper" type="CollisionShape2D" parent="." unique_id=590976015]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_qq576")
+
+[node name="Middle" type="CollisionShape2D" parent="." unique_id=892570660]
+position = Vector2(0, 267.5)
+shape = SubResource("RectangleShape2D_achqy")
+
+[node name="Lower" type="CollisionShape2D" parent="." unique_id=1230997726]
+position = Vector2(0, 527)
+shape = SubResource("RectangleShape2D_a6us5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

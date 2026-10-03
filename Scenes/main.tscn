@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://0oxr6i6napvc"]
+
+[ext_resource type="Script" uid="uid://b7aqcuv8qhh5d" path="res://Scripts/main.gd" id="1_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cxgcgxajf3vym" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://d1fgq7p0cv5oi" path="res://Scenes/pipes.tscn" id="2_bo1nx"]
+[ext_resource type="Texture2D" uid="uid://cemgau15hl3bn" path="res://Assets/Background/Background1.png" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://rdv7u2qyfho2" path="res://Scenes/ui.tscn" id="6_21xkr"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fopa5"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hesbv"]
+normal = Vector2(0, 1)
+
+[node name="Main" type="Node" unique_id=964601510]
+script = ExtResource("1_8gbba")
+pipes_scene = ExtResource("2_bo1nx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=482628090]
+scale = Vector2(1.9726563, 3.3515625)
+texture = ExtResource("3_jjvhh")
+centered = false
+
+[node name="Player" parent="." unique_id=765697122 instance=ExtResource("1_jjgbg")]
+position = Vector2(240, 427)
+
+[node name="PipeHolder" type="Node" parent="." unique_id=1469046610]
+
+[node name="Upper" type="Marker2D" parent="." unique_id=1865640642]
+position = Vector2(530, 275)
+
+[node name="Lower" type="Marker2D" parent="." unique_id=206753248]
+position = Vector2(530, 578)
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1121665883]
+wait_time = 1.2
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=656785934]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1691335094]
+position = Vector2(234, 832)
+shape = SubResource("WorldBoundaryShape2D_fopa5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=643787160]
+position = Vector2(238, 6)
+shape = SubResource("WorldBoundaryShape2D_hesbv")
+
+[node name="UI" parent="." unique_id=132765390 instance=ExtResource("6_21xkr")]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="start_game" from="UI" to="." method="new_game"]
